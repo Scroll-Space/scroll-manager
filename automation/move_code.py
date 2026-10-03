@@ -18,7 +18,8 @@ EXCLUDE_PATTERNS: Set[str] = {
     "/automation",
     "__pycache__",    
     ".DS_Store",
-    "*.pyc"
+    "*.pyc",
+    "*.free"
 }
 
 def should_exclude(rel_path: Path) -> bool:
