@@ -38,65 +38,22 @@
         "ar-SA": "لوحة التحكم في التمرير لمستندات PDF. تتيح التنقل إلى الموضع المطلوب باستخدام إحداثيات المنطقة المرئية ونسبة التكبير. كما توفر إعدادات إضافية للملحق Scroll Back."
       },
       "url": "index.html",
-      "icons": [
-        "resources/icons/icon%scale%(default).%extension%(png|svg)"
-      ],
-      "icons2": [
-        {
-          "style": "light",
-          "100%": {
-            "normal": "resources/icons/icon.png"
-          },
-          "125%": {
-            "normal": "resources/icons/icon@1.25x.png"
-          },
-          "150%": {
-            "normal": "resources/icons/icon@1.5x.png"
-          },
-          "175%": {
-            "normal": "resources/icons/icon@1.75x.png"
-          },
-          "200%": {
-            "normal": "resources/icons/icon@2x.png"
-          },
-          "*": {
-            "normal": "resources/icons/icon.svg"
-          }
-        },
-        {
-          "style": "dark",
-          "100%": {
-            "normal": "resources/icons/icon.png"
-          },
-          "125%": {
-            "normal": "resources/icons/icon@1.25x.png"
-          },
-          "150%": {
-            "normal": "resources/icons/icon@1.5x.png"
-          },
-          "175%": {
-            "normal": "resources/icons/icon@1.75x.png"
-          },
-          "200%": {
-            "normal": "resources/icons/icon@2x.png"
-          },
-          "*": {
-            "normal": "resources/icons/icon.svg"
-          }
-        }
-      ],
+      "icons": "resources/icons/icon%state%(normal)%scale%(default|*).%extension%(svg|png)",
       "isViewer": true,
       "EditorsSupport": [
         "pdf"
       ],
-      
       "initDataType": "none",
       "initOnSelectionChanged": false,
       "isVisual": false,
       "isModal": false,
       "isInsideMode": false,
       "type": "background",
-
+      "events": [
+        "onDocumentContentReady",
+        "onToolbarMenuClick",
+        "onActiveWindow"
+      ],
       "store": {
         "background": {
           "light": "#726868",

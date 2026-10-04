@@ -1,6 +1,6 @@
 import { PluginStorage } from './scroll-core/m_storage.js';
 import { EditorController } from './scroll-core/m_editor.js';
-import { PanelUIController } from './m_ui.js';
+import { PanelUIController } from './scroll-core/m_ui.js';
 
 const plugStore = new PluginStorage(window);
 const editorCtrl = new EditorController(window);
