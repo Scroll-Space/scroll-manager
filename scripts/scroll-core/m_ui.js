@@ -1,7 +1,7 @@
-import { PluginStorage } from './scroll-core/m_storage.js';
-import { EditorController } from './scroll-core/m_editor.js';
+import { PluginStorage } from './m_storage.js';
+import { EditorController } from './m_editor.js';
 
-export class PluginUIController {
+export class PanelUIController {
     /** @type {Window} */
     #win;
     /** @type {PluginStorage} */
@@ -73,9 +73,17 @@ export class PluginUIController {
         this.#el_viewCard?.addEventListener('click', () => {
             let savedView = this.#plugStore.getView();
             this.#editorCtrl.setView(savedView);
+
+            this.#win.Asc.plugin.executeMethod("GetCurrentPage", [], (returnValue) => {
+                console.log(returnValue);
+            });
+
+            this.#win.Asc.plugin.executeMethod("GetDocumentProperties", [], function (props) {
+                console.log(props);
+            });
         });
 
-        this.#el_saveBtn?.addEventListener('click', async () => {
+        this.#el_saveBtn?.addEventListener('click', () => {
             let view = this.#editorCtrl.getView();
             this.#plugStore.saveView(view);
             this.update();

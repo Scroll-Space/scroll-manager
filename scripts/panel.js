@@ -1,10 +1,10 @@
 import { PluginStorage } from './scroll-core/m_storage.js';
 import { EditorController } from './scroll-core/m_editor.js';
-import { PluginUIController } from './m_ui.js';
+import { PanelUIController } from './m_ui.js';
 
 const plugStore = new PluginStorage(window);
 const editorCtrl = new EditorController(window);
-const uiCtrl = new PluginUIController(window, plugStore, editorCtrl);
+const uiCtrl = new PanelUIController(window, plugStore, editorCtrl);
 
 window.Asc.plugin.init = function () {
     uiCtrl.initUI();

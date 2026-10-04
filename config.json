@@ -89,7 +89,14 @@
       "EditorsSupport": [
         "pdf"
       ],
-      "type": "panel",
+      
+      "initDataType": "none",
+      "initOnSelectionChanged": false,
+      "isVisual": false,
+      "isModal": false,
+      "isInsideMode": false,
+      "type": "background",
+
       "store": {
         "background": {
           "light": "#726868",
