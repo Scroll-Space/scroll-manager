@@ -6,23 +6,23 @@ const editorCtrl = new EditorController(window);
 let panelWindow = null;
 
 window.Asc.plugin.init = function () {
-    // Добавляем на вкладку плагинов кнопку для открытия панели
+    // Add a button to the plugins tab to open the panel
     setupToolbar();
 
-    // Если в текущей сессии не востанавливался скролл, то пытаемся его восстановить
+    // If the scroll wasn’t restored in the current session, we try to restore it.
     if (!plugStore.getIsRestoredFlag()) {
         tryRestoreScroll();
-        // Указываем что сколл был восстановлен,
-        // чтобы не восстанавливать его повторно в этой сессии
+        // Indicate that the score was restored
+        // for not to restore it again in this session
         plugStore.setIsRestoredFlag(true);
     }
 
-    // Таймер для сохранения текущего скролла в локальное хранилище
+    // Saving the current position every second
     startTempScrollSaver();    
 };
 
 function setupToolbar() {
-    // Добавляем на вкладку плагинов кнопку для открытия панели
+    // Add a button to the plugins tab to open the panel
     window.Asc.plugin.executeMethod("AddToolbarMenuItem", [{
         guid: window.Asc.plugin.guid,
         tabs: [
@@ -45,7 +45,7 @@ function setupToolbar() {
         ],
     }]);
 
-    // Обработчик клика по кнопке открытияпанели
+    // Click handler for the panel opening button
     window.Asc.plugin.attachToolbarMenuClickEvent("openScrollPanelBtn", function () {
         if (!panelWindow) {
             panelWindow = new window.Asc.PluginWindow();
@@ -70,7 +70,7 @@ function tryRestoreScroll() {
     let savedView = plugStore.getView();
     let tempSavedView = plugStore.getView(true);
 
-    // При загрузке плагина, если есть временный скролл, то он становится основным
+    // if there is a temporary scroll, it becomes the main
     if (tempSavedView !== null && isViewDifferent(savedView, tempSavedView) && plugStore.getSaveByCloseFlag()) {
         savedView = tempSavedView;
         plugStore.saveView(savedView);
@@ -79,10 +79,9 @@ function tryRestoreScroll() {
     if (savedView === null) return;
 
     editorCtrl.setView(savedView);
-
 }
 
-// Минималистичный таймер, который почти не тратит CPU
+// Timer for saving the current position every second
 function startTempScrollSaver() {
     setInterval(() => {
         if (!plugStore.getSaveByCloseFlag()) return;
@@ -100,17 +99,17 @@ function startTempScrollSaver() {
 }
 
 function isViewDifferent(view1, view2) {
-    // Если один из них null, а другой нет — они не равны
+    // If one of them is null and the other is not — they are not equal
     if (!view1 || !view2) return view1 !== view2;
 
-    // Сравниваем поля напрямую
+    // Compare fields directly
     return view1.x !== view2.x ||
         view1.y !== view2.y ||
         view1.zoom !== view2.zoom;
 }
 
 window.Asc.plugin.button = function (id) {
-    // ONLYOFFICE передает id = -1 при нажатии на крестик боковой панели
+    // ONLYOFFICE passes id = -1 when you click the cross in the sidebar.
     if (Number(id) === -1) {
         panelWindow?.close();
         panelWindow = null;
