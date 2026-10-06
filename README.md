@@ -1,6 +1,5 @@
-# scroll-panel
-The PDF document scrolling control panel.  
-Provides navigation to the required position by the visibility area coordinates and scale.  
-Also provides additional settings for the **`Scroll Back`** plugin.
+# scroll-manager
+Plugin for automatic saving and restoring of scroll position in PDF documents.  
+Provides a side panel for quick navigation and saving settings.  
 
 ![short description](resources/store/screenshots/short_description.png)
