@@ -50,9 +50,7 @@
       "isInsideMode": false,
       "type": "background",
       "events": [
-        "onDocumentContentReady",
-        "onToolbarMenuClick",
-        "onActiveWindow"
+        "onToolbarMenuClick"
       ],
       "store": {
         "background": {

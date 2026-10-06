@@ -50,4 +50,8 @@ export class EditorController {
             this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
         }
     }
+
+    // this.#win.Asc.plugin.executeMethod("GetCurrentPage", [], (returnValue) => {
+    //     console.log(returnValue);
+    // });
 }

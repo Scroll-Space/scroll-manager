@@ -14,7 +14,8 @@ export class PluginStorage {
      */
     constructor(win = window) {
         this.#win = win;
-        this.#prefix = "oautoscroll_plugin_";
+        // Scroll Manager Plugin prefix
+        this.#prefix = "smp_";
         this.#idMoveByOpenFlag = this.#prefix + "move_by_open";
         this.#idSaveByCloseFlag = this.#prefix + "save_by_close";
     }
@@ -26,6 +27,11 @@ export class PluginStorage {
     getTempIdDoc() {
         return this.#prefix + "temp_" + (this.#win.Asc?.plugin?.info?.documentTitle || "default_doc");
     }
+
+    getRestoredId() {
+        return this.#prefix + (this.#win.Asc?.plugin?.info?.documentId || "default_doc") + "_restored";
+    }
+
 
     /**
      * @typedef { Object } ViewState
@@ -118,15 +124,21 @@ export class PluginStorage {
         }
     }
 
-    count() {
-        let total = 0;
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.startsWith(this.#prefix)) {
-                total++;
+    getIsRestoredFlag() {
+        const rawData = sessionStorage.getItem(this.getRestoredId());
+        return rawData ? JSON.parse(rawData) : false;
+    }
+
+    setIsRestoredFlag(flag) {
+        if (flag) {
+            try {
+                sessionStorage.setItem(this.getRestoredId(), flag.toString());
+            } catch (e) {
+                console.error("PluginStorage [setIsRestoredFlag]: ", e);
             }
+        } else {
+            sessionStorage.removeItem(this.getRestoredId());
         }
-        return total;
     }
 
     clearAll() {

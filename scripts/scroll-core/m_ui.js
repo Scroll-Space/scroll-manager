@@ -73,14 +73,6 @@ export class PanelUIController {
         this.#el_viewCard?.addEventListener('click', () => {
             let savedView = this.#plugStore.getView();
             this.#editorCtrl.setView(savedView);
-
-            this.#win.Asc.plugin.executeMethod("GetCurrentPage", [], (returnValue) => {
-                console.log(returnValue);
-            });
-
-            this.#win.Asc.plugin.executeMethod("GetDocumentProperties", [], function (props) {
-                console.log(props);
-            });
         });
 
         this.#el_saveBtn?.addEventListener('click', () => {

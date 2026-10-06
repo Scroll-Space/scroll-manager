@@ -6,9 +6,19 @@ const editorCtrl = new EditorController(window);
 let panelWindow = null;
 
 window.Asc.plugin.init = function () {
-    tryRestoreScroll();
-    startTempScrollSaver();
+    // Добавляем на вкладку плагинов кнопку для открытия панели
     setupToolbar();
+
+    // Если в текущей сессии не востанавливался скролл, то пытаемся его восстановить
+    if (!plugStore.getIsRestoredFlag()) {
+        tryRestoreScroll();
+        // Указываем что сколл был восстановлен,
+        // чтобы не восстанавливать его повторно в этой сессии
+        plugStore.setIsRestoredFlag(true);
+    }
+
+    // Таймер для сохранения текущего скролла в локальное хранилище
+    startTempScrollSaver();    
 };
 
 function setupToolbar() {
@@ -52,25 +62,24 @@ function setupToolbar() {
         });
         panelWindow.activate(true);
     });
-
-
 }
 
 function tryRestoreScroll() {
-    if (plugStore.getMoveByOpenFlag()) {
-        let savedView = plugStore.getView();
-        let tempSavedView = plugStore.getView(true);
+    if (!plugStore.getSaveByCloseFlag()) return;
 
-        // При загрузке плагина, если есть временный скролл, то он становится основным
-        if (tempSavedView !== null && isViewDifferent(savedView, tempSavedView) && plugStore.getSaveByCloseFlag()) {
-            savedView = tempSavedView;
-            plugStore.saveView(savedView);
-        }
+    let savedView = plugStore.getView();
+    let tempSavedView = plugStore.getView(true);
 
-        if (savedView === null) return;
-
-        editorCtrl.setView(savedView);
+    // При загрузке плагина, если есть временный скролл, то он становится основным
+    if (tempSavedView !== null && isViewDifferent(savedView, tempSavedView) && plugStore.getSaveByCloseFlag()) {
+        savedView = tempSavedView;
+        plugStore.saveView(savedView);
     }
+
+    if (savedView === null) return;
+
+    editorCtrl.setView(savedView);
+
 }
 
 // Минималистичный таймер, который почти не тратит CPU
