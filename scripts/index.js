@@ -28,13 +28,13 @@ function setupToolbar() {
         tabs: [
             {
                 id: "plugins",
-                text: "Scroll Manager",
+                text: "Scroll Panel",
                 items: [
                     {
                         id: "openScrollPanelBtn",
                         type: "button",
-                        text: "Scroll Manager",
-                        hint: "Open scroll panel",
+                        text: "Scroll Panel",
+                        hint: "Open Scroll Panel",
                         split: false,
                         enableToggle: false,
                         lockInViewMode: false,
@@ -53,7 +53,7 @@ function setupToolbar() {
 
         panelWindow.show({
             url: "panel.html",
-            description: "Scroll Manager",
+            description: "Scroll Panel",
             type: "panel",
             isVisual: true,
             isViewer: true,

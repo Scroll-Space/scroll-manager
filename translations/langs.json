@@ -1,16 +1,16 @@
 [
-  "en-US",
-  "ru-RU",
-  "fr-FR",
-  "es-ES",
-  "de-DE",
+  "ar-SA",
   "cs-CZ",
-  "zh-CN",
-  "pt-BR",
-  "sr-Cyrl-RS",
-  "sr-Latn-RS",
-  "ja-JP",
-  "sq-AL",
+  "de-DE",
+  "en-US",
+  "es-ES",
+  "fr-FR",
   "it-IT",
-  "ar-SA"
+  "ja-JP",
+  "pt-BR",
+  "ru-RU",
+  "sq-AL",
+  "sr-Cyrl-RS",
+	"sr-Latn-RS",
+  "zh-CN"
 ]
