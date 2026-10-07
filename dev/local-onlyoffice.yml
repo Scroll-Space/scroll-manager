@@ -1,0 +1,21 @@
+services:
+  onlyoffice:
+    image: onlyoffice/documentserver:latest
+    container_name: onlyoffice-dev
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      # JWT выключен ТОЛЬКО для локальной отладки.
+      # Для продакшена — включить и задать JWT_SECRET.
+      - JWT_ENABLED=false
+      # Помогает тестовому примеру и мета-запросам работать в Docker
+      - ALLOW_PRIVATE_IP_ADDRESS=true
+      - ALLOW_META_IP_ADDRESS=true
+    # volumes:
+      # Папка с плагином (корень проекта) → папка внутри контейнера.
+      # Имя папки ОБЯЗАТЕЛЬНО = "asc." + guid из config.json.
+      # - ../:/var/www/onlyoffice/documentserver/sdkjs-plugins/asc.{ca39b178-83ef-4074-b248-108d0634a4db}
+    # privileged нужен только в некоторых окружениях (SELinux/AppArmor).
+    # Если сервер стартует без него — уберите строку.
+    privileged: true

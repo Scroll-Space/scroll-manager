@@ -15,7 +15,7 @@ EXCLUDE_PATTERNS: Set[str] = {
     ".idea",
     ".vscode",
     "/docs",
-    "/automation",
+    "/dev",
     "__pycache__",    
     ".DS_Store",
     "*.pyc",
