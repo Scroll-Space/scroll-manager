@@ -82,11 +82,11 @@ function tryRestoreScroll() {
 }
 
 // Timer for saving the current position every second
-function startTempScrollSaver() {
-    setInterval(() => {
+async function startTempScrollSaver() {
+    setInterval(async () => {
         if (!plugStore.getSaveByCloseFlag()) return;
 
-        const currentView = editorCtrl.getView();
+        const currentView = await editorCtrl.getView();
 
         if (currentView === null) return;
 

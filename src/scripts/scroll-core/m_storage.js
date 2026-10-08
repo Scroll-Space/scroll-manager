@@ -35,6 +35,7 @@ export class PluginStorage {
 
     /**
      * @typedef { Object } ViewState
+     * @property { number } pageIndex - Page index
      * @property { number } x - Scroll X coordinate
      * @property { number } y - Scroll Y coordinate
      * @property { number } zoom - Zoom level (in percentages, e.g. 130)

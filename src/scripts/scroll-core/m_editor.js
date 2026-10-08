@@ -9,8 +9,22 @@ export class EditorController {
         this.#win = win;
     }
 
+    // Private wrapper method
+    #execMethod(method, args = []) {
+        return new Promise((resolve, reject) => {
+            try {
+                this.#win.Asc.plugin.executeMethod(method, args, (returnValue) => {
+                    resolve(returnValue);
+                });
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
     /**
-     * @typedef { Object } ViewState
+     * @typedef { Object } ViewState     * 
+     * @property { number } pageIndex - Page index
      * @property { number } x - Scroll X coordinate
      * @property { number } y - Scroll Y coordinate
      * @property { number } zoom - Zoom level (in percentages, e.g. 130)
@@ -19,15 +33,23 @@ export class EditorController {
     /**
      * @returns {ViewState | null} The state object or null if there is no data.
      */
-    getView() {
+    async getView() {
         try {
-            const scrollInfo = this.#win?.parent?.Asc?.editor?.getCurScroll();
-            const zoomText = this.#win?.parent?.document?.querySelector('#label-zoom')?.textContent;
+            // const scrollInfo = this.#win?.parent?.Asc?.editor?.getCurScroll();
+            // const zoomText = this.#win?.parent?.document?.querySelector('#label-zoom')?.textContent;
 
+            // const res = {
+            //     x: scrollInfo?.x ?? null,
+            //     y: scrollInfo?.y ?? null,
+            //     zoom: zoomText ? Number(zoomText.replace(',', '.').match(/[\d.]+/)?.[0]) : null
+            // };
+
+            const pageIndex = await this.#execMethod("GetCurrentPage");
             const res = {
-                x: scrollInfo?.x ?? null,
-                y: scrollInfo?.y ?? null,
-                zoom: zoomText ? Number(zoomText.replace(',', '.').match(/[\d.]+/)?.[0]) : null
+                pageIndex: pageIndex ?? null,
+                x: 0.0,
+                y: 0.0,
+                zoom: 100
             };
 
             // If at least one of the values is null, undefined, or NaN - return null.
@@ -46,8 +68,9 @@ export class EditorController {
      */
     setView(view) {
         if (view) {
-            this.#win?.parent?.Asc?.editor.zoom(view.zoom);
-            this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
+            this.#win.Asc.plugin.executeMethod("GoToPage", [view.pageIndex]);
+            // this.#win?.parent?.Asc?.editor.zoom(view.zoom);
+            // this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
         }
     }
 

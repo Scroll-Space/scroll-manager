@@ -75,8 +75,8 @@ export class PanelUIController {
             this.#editorCtrl.setView(savedView);
         });
 
-        this.#el_saveBtn?.addEventListener('click', () => {
-            let view = this.#editorCtrl.getView();
+        this.#el_saveBtn?.addEventListener('click', async () => {
+            let view = await this.#editorCtrl.getView();
             this.#plugStore.saveView(view);
             this.update();
         });
@@ -151,10 +151,14 @@ export class PanelUIController {
             }
         } else {
             this.#el_viewCard.classList.remove('disabled');
+        //     this.#text_viewCard.innerHTML = `
+        //     <div>page: <span class="val">${savedView.pageIndex+1}</span></div>
+        //     <div>x: <span class="val">${Number(savedView.x).toFixed(2)}</span></div>
+        //     <div>y: <span class="val">${Number(savedView.y).toFixed(2)}</span></div>
+        //     <div>zoom: <span class="val">${savedView.zoom}%</span></div>
+        // `;
             this.#text_viewCard.innerHTML = `
-            <div>x: <span class="val">${Number(savedView.x).toFixed(2)}</span></div>
-            <div>y: <span class="val">${Number(savedView.y).toFixed(2)}</span></div>
-            <div>zoom: <span class="val">${savedView.zoom}%</span></div>
+            <div>page: <span class="val">${savedView.pageIndex+1}</span></div>
         `;
 
             // Show the button
