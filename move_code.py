@@ -64,6 +64,8 @@ def main():
     # Имя текущей директории плагина
     plugin_name: str = source_dir.name
 
+    source_dir = source_dir / "src"
+
     # 2. Преобразуем входящую строку в объект Path и проверяем его
     target_repo: Path = Path(args.dest_repo).resolve()
     if not target_repo.exists() or not target_repo.is_dir():
@@ -76,7 +78,7 @@ def main():
                                "content" /
                                plugin_name)
 
-    print(f"Источник (рабочая директория): {source_dir}")
+    print(f"Источник : {source_dir}")
     print(f"Название плагина:             {plugin_name}")
     print(f"Назначение:                   {target_plugin_dir}\n")
 
