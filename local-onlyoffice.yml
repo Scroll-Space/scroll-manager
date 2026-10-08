@@ -1,0 +1,14 @@
+services:
+  onlyoffice:
+    build: .
+    container_name: onlyoffice-dev
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - JWT_ENABLED=false
+      - ALLOW_PRIVATE_IP_ADDRESS=true
+      - ALLOW_META_IP_ADDRESS=true
+      - EXAMPLE_ENABLED=true
+
+    privileged: true
