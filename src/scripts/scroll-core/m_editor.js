@@ -66,15 +66,11 @@ export class EditorController {
     /**
      * @param {ViewState | null} view - The state object or null if there is no data.
      */
-    setView(view) {
-        if (view) {
-            this.#win.Asc.plugin.executeMethod("GoToPage", [view.pageIndex]);
-            // this.#win?.parent?.Asc?.editor.zoom(view.zoom);
-            // this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
-        }
-    }
+    async setView(view) {
+        if (!view) return;
 
-    // this.#win.Asc.plugin.executeMethod("GetCurrentPage", [], (returnValue) => {
-    //     console.log(returnValue);
-    // });
+        await this.#execMethod("GoToPage", [view.pageIndex]);
+        // this.#win?.parent?.Asc?.editor.zoom(view.zoom);
+        // this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
+    }
 }

@@ -18,7 +18,7 @@
   "offered": "Jhon Titor",
   "guid": "asc.{CA39B178-83EF-4074-B248-108D0634A4DB}",
   "version": "1.0.0",
-  "minVersion": "9.3.0",
+  "minVersion": "9.4.0",
   "variations": [
     {
       "description": "Plugin for automatic saving and restoring of scroll position in PDF documents. Provides a side panel for quick navigation and saving settings.",

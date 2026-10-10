@@ -5,13 +5,13 @@ const plugStore = new PluginStorage(window);
 const editorCtrl = new EditorController(window);
 let panelWindow = null;
 
-window.Asc.plugin.init = function () {
+window.Asc.plugin.init = async function () {
     // Add a button to the plugins tab to open the panel
     setupToolbar();
 
     // If the scroll wasn’t restored in the current session, we try to restore it.
     if (!plugStore.getIsRestoredFlag()) {
-        tryRestoreScroll();
+        await tryRestoreScroll();
         // Indicate that the score was restored
         // for not to restore it again in this session
         plugStore.setIsRestoredFlag(true);
@@ -64,7 +64,7 @@ function setupToolbar() {
     });
 }
 
-function tryRestoreScroll() {
+async function tryRestoreScroll() {
     if (!plugStore.getSaveByCloseFlag()) return;
 
     let savedView = plugStore.getView();
@@ -78,7 +78,7 @@ function tryRestoreScroll() {
 
     if (savedView === null) return;
 
-    editorCtrl.setView(savedView);
+    await editorCtrl.setView(savedView);
 }
 
 // Timer for saving the current position every second

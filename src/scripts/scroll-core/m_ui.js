@@ -70,9 +70,9 @@ export class PanelUIController {
 
         });
 
-        this.#el_viewCard?.addEventListener('click', () => {
+        this.#el_viewCard?.addEventListener('click', async () => {
             let savedView = this.#plugStore.getView();
-            this.#editorCtrl.setView(savedView);
+            await this.#editorCtrl.setView(savedView);
         });
 
         this.#el_saveBtn?.addEventListener('click', async () => {
