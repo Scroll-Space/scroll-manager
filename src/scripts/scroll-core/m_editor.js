@@ -35,21 +35,15 @@ export class EditorController {
      */
     async getView() {
         try {
-            // const scrollInfo = this.#win?.parent?.Asc?.editor?.getCurScroll();
-            // const zoomText = this.#win?.parent?.document?.querySelector('#label-zoom')?.textContent;
-
-            // const res = {
-            //     x: scrollInfo?.x ?? null,
-            //     y: scrollInfo?.y ?? null,
-            //     zoom: zoomText ? Number(zoomText.replace(',', '.').match(/[\d.]+/)?.[0]) : null
-            // };
+            const scrollInfo = this.#win?.parent?.Asc?.editor?.getCurScroll();
+            const zoomText = this.#win?.parent?.document?.querySelector('#label-zoom')?.textContent;
 
             const pageIndex = await this.#execMethod("GetCurrentPage");
             const res = {
                 pageIndex: pageIndex ?? null,
-                x: 0.0,
-                y: 0.0,
-                zoom: 100
+                x: scrollInfo?.x ?? null,
+                y: scrollInfo?.y ?? null,
+                zoom: zoomText ? Number(zoomText.replace(',', '.').match(/[\d.]+/)?.[0]) : null
             };
 
             // If at least one of the values is null, undefined, or NaN - return null.
@@ -70,7 +64,7 @@ export class EditorController {
         if (!view) return;
 
         await this.#execMethod("GoToPage", [view.pageIndex]);
-        // this.#win?.parent?.Asc?.editor.zoom(view.zoom);
-        // this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
+        this.#win?.parent?.Asc?.editor.zoom(view.zoom);
+        this.#win?.parent?.Asc?.editor.scrollToXY(view.x, view.y);
     }
 }

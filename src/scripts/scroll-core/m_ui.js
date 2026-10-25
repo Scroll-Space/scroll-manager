@@ -151,14 +151,11 @@ export class PanelUIController {
             }
         } else {
             this.#el_viewCard.classList.remove('disabled');
-        //     this.#text_viewCard.innerHTML = `
-        //     <div>page: <span class="val">${savedView.pageIndex+1}</span></div>
-        //     <div>x: <span class="val">${Number(savedView.x).toFixed(2)}</span></div>
-        //     <div>y: <span class="val">${Number(savedView.y).toFixed(2)}</span></div>
-        //     <div>zoom: <span class="val">${savedView.zoom}%</span></div>
-        // `;
             this.#text_viewCard.innerHTML = `
             <div>page: <span class="val">${savedView.pageIndex+1}</span></div>
+            <div>x: <span class="val">${Number(savedView.x).toFixed(2)}</span></div>
+            <div>y: <span class="val">${Number(savedView.y).toFixed(2)}</span></div>
+            <div>zoom: <span class="val">${savedView.zoom}%</span></div>
         `;
 
             // Show the button

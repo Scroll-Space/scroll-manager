@@ -103,7 +103,8 @@ function isViewDifferent(view1, view2) {
     if (!view1 || !view2) return view1 !== view2;
 
     // Compare fields directly
-    return view1.x !== view2.x ||
+    return view1.pageIndex !== view2.pageIndex ||
+        view1.x !== view2.x ||
         view1.y !== view2.y ||
         view1.zoom !== view2.zoom;
 }
